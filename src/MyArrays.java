@@ -33,4 +33,55 @@ public class MyArrays {
             a[j+1] = val;
         }
     }
+
+    public static void mergeSort (int[] a){
+        if(a.length <= 1){
+            return;
+        }
+        int[] first = new int[a.length / 2];
+        int[] second = new int[a.length - first.length];
+        for(int i = 0; i < a.length; i++){
+            if(i<first.length){
+                first[i] = a[i];
+            }
+            else{
+                second[i-first.length] = a[i];
+            }
+        }
+        mergeSort(first);
+        mergeSort(second);
+        merge(first, second, a);
+    }
+
+    public static void merge(int[] first, int[] second, int[] a){
+        int indexf = 0;
+        int indexs = 0;
+        int i = 0;
+        while(i<first.length + second.length){
+            if(indexf >= first.length){
+                a[i] = second[indexs];
+                indexs ++;
+                i++;
+            }
+            else if(indexs >= second.length){
+                a[i] = first[indexf];
+                indexf++;
+                i++;
+            }
+            else if(first[indexf] > second[indexs]){
+                a[i] = second[indexs];
+                indexs ++;
+                i++;
+            }
+            else{
+                a[i] = first[indexf];
+                indexf++;
+                i++;
+            }
+        }
+
+
+
+
+    }
 }
